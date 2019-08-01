@@ -17,7 +17,7 @@ print('            #                                   #')
 print('            #        Files Extractor            #')
 print('            #        version 1.0                #')
 print('            #        Author: Owbird             #')
-print('            #        https://github/owbird      #')
+print('            #        https://github.com/owbird  #')
 print('            #                                   #')
 print('            #####################################')
 
