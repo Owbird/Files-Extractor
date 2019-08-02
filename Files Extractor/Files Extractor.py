@@ -2,6 +2,7 @@ import os
 import shutil
 import sys
 import argparse
+import glob
 
 parser=argparse.ArgumentParser()
 
@@ -70,19 +71,10 @@ for root, sub, files in os.walk(root_directory):
 				continue
 
 			# Showing current process
-			print(f'[*] Copied {file}')
+			print(f'[*] Extracted {file}')
 
 # Setting copied files to 0
-copied = 0
-
-# Looping through copied items folder
-for file in os.listdir(args.path):
-
-	# If it is what we copied
-	if file.endswith(args.ext):
-		
-		# Increase counter by 1
-		copied += 1
+copied = len(glob(f"*{ext}"))
 
 # If nothing was copied
 if copied == 0:
