@@ -1,8 +1,8 @@
+from glob import glob
 import os
 import shutil
 import sys
 import argparse
-import glob
 
 parser=argparse.ArgumentParser()
 
@@ -48,6 +48,13 @@ print()
 # checking for type of os
 root_directory = "c:/" if os.name == "nt" else "/"
 
+try:
+
+	os.mkdir(os.path.join(args.path, "Files Extractor"))
+
+except FileExistsError:
+   	
+	pass 
 # Going through the computer
 for root, sub, files in os.walk(root_directory):
 
@@ -63,7 +70,7 @@ for root, sub, files in os.walk(root_directory):
 			try:
 				
 				# Copy file
-				shutil.copy(copy_path, args.path)
+				shutil.copy(copy_path, os.path.join(args.path, "Files Extractor"))
 			
 			# Checking for errors					
 			except (shutil.SameFileError, FileNotFoundError, PermissionError, OSError):
@@ -74,7 +81,9 @@ for root, sub, files in os.walk(root_directory):
 			print(f'[*] Extracted {file}')
 
 # Setting copied files to 0
-copied = len(glob(f"*{ext}"))
+
+os.chdir(os.path.join(args.path, "Files Extractor"))
+copied = len(glob(f"*{args.ext}"))
 
 # If nothing was copied
 if copied == 0:
@@ -102,14 +111,13 @@ if args.zip:
 	folder = args.path.split('/')[-1]
 	
 	# Changing directory
-	os.chdir(args.path)
 	os.chdir('../')
 	
 	# Creating zip
-	shutil.make_archive(folder, 'zip', args.zip)
+	shutil.make_archive(args.zip, 'zip', "Files Extractor")
 
 	# Deleting folder
-	shutil.rmtree(folder)
+	shutil.rmtree("Files Extractor")
 	
 	# Showing current process
 	print('[*] Archiving done!')

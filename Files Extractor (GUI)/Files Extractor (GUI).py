@@ -71,6 +71,7 @@ class Events(object):
         try:
         
        		os.mkdir(os.path.join(Events.dir, "Files Extractor"))
+       	
        	except FileExistsError:
        	
        		pass
